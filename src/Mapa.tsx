@@ -8,15 +8,16 @@ import type { Metrica, Nivel, Par } from './types'
 // worker servido como arquivo estático (ver scripts/copiar_worker.sh)
 maplibregl.setWorkerUrl('/maplibre/maplibre-gl-worker.mjs')
 
-const RAMPA = ['#1b3436', '#1f4f52', '#25777a', '#2d9f9d', '#4fd1c5', '#a8f0dc']
-const COR_ZERO = '#1a1d20'
-const COR_SEM = '#141618'
+// paleta do Médicos Atualizados: paper #f7f2e8, teal #1f6f72, navy #122033, wine #7c2729
+const RAMPA = ['#dfe9e4', '#b4d2cd', '#7cb2ae', '#3f8f90', '#1f6f72', '#122033']
+const COR_ZERO = '#e9e0d0'
+const COR_SEM = '#efe8dc'
 const BR_BOUNDS: [[number, number], [number, number]] = [[-74, -34], [-34, 5.5]]
 
 const estiloVazio: maplibregl.StyleSpecification = {
   version: 8,
   sources: {},
-  layers: [{ id: 'fundo', type: 'background', paint: { 'background-color': '#0e1012' } }],
+  layers: [{ id: 'fundo', type: 'background', paint: { 'background-color': '#f7f2e8' } }],
 }
 
 function bbox(fc: FeatureCollection, filtro: (f: Feature) => boolean): [[number, number], [number, number]] {
@@ -146,15 +147,15 @@ export default function Mapa() {
       id, type: 'fill', source, layout: { visibility: 'none' },
       paint: {
         'fill-color': cor(),
-        'fill-opacity': ['case', ['boolean', ['feature-state', 'hover'], false], 1, 0.88],
+        'fill-opacity': ['case', ['boolean', ['feature-state', 'hover'], false], 1, 0.92],
       },
     })
     fill('mun-fill', 'muns')
     fill('uf-fill', 'ufs')
-    map.addLayer({ id: 'mun-line', type: 'line', source: 'muns', layout: { visibility: 'none' }, paint: { 'line-color': '#0e1012', 'line-width': 0.4, 'line-opacity': 0.8 } })
-    map.addLayer({ id: 'uf-line', type: 'line', source: 'ufs', paint: { 'line-color': '#e9e6df', 'line-width': ['interpolate', ['linear'], ['zoom'], 3, 0.6, 7, 1.4], 'line-opacity': 0.55 } })
-    map.addLayer({ id: 'hover-line', type: 'line', source: 'muns', filter: ['==', ['id'], -1], paint: { 'line-color': '#fff', 'line-width': 1.6 } })
-    map.addLayer({ id: 'hover-line-uf', type: 'line', source: 'ufs', filter: ['==', ['id'], -1], paint: { 'line-color': '#fff', 'line-width': 2 } })
+    map.addLayer({ id: 'mun-line', type: 'line', source: 'muns', layout: { visibility: 'none' }, paint: { 'line-color': '#f7f2e8', 'line-width': 0.4, 'line-opacity': 0.9 } })
+    map.addLayer({ id: 'uf-line', type: 'line', source: 'ufs', paint: { 'line-color': '#171717', 'line-width': ['interpolate', ['linear'], ['zoom'], 3, 0.6, 7, 1.4], 'line-opacity': 0.5 } })
+    map.addLayer({ id: 'hover-line', type: 'line', source: 'muns', filter: ['==', ['id'], -1], paint: { 'line-color': '#7c2729', 'line-width': 1.6 } })
+    map.addLayer({ id: 'hover-line-uf', type: 'line', source: 'ufs', filter: ['==', ['id'], -1], paint: { 'line-color': '#7c2729', 'line-width': 2 } })
     setCamadas(true)
   }, [pronto, geoUf, geoMun])
 
