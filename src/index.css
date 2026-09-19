@@ -55,6 +55,9 @@ button, input, select { font: inherit; color: inherit; }
 .landing footer { padding: 56px 0 72px; }
 .landing footer ul { color: var(--texto2); padding-left: 18px; max-width: 80ch; }
 .landing footer li { margin-bottom: 8px; }
+.irmao { color: var(--texto2); margin: 16px 0 8px; }
+.irmao a, .painel-rodape a { color: var(--acento); }
+.irmao a:hover, .painel-rodape a:hover { text-decoration: underline; }
 
 /* ---------- mapa ---------- */
 .mapa-tela { display: grid; grid-template-columns: 360px 1fr; height: 100dvh; }

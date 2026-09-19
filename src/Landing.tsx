@@ -14,6 +14,7 @@ export default function Landing() {
           <a href="#/mapa">Mapa</a>
           <a href="#metodo">Método</a>
           <a href="#fontes">Fontes</a>
+          <a href="https://medicosatualizados.com.br/" target="_blank" rel="noreferrer">Médicos Atualizados</a>
         </nav>
       </header>
 
@@ -78,6 +79,7 @@ export default function Landing() {
           <li>População: IBGE, Censo Demográfico 2022 (SIDRA, tabela 4714).</li>
           <li>Malhas territoriais: IBGE, API de malhas geográficas v3.</li>
         </ul>
+        <p className="irmao">Projeto irmão: <a href="https://medicosatualizados.com.br/" target="_blank" rel="noreferrer">Médicos Atualizados</a>, radar editorial por especialidade, com o que saiu de novo em cada área.</p>
         <p className="mini">Dados coletados em {meta ? meta.geradoEm.split('-').reverse().join('/') : '…'}. Projeto independente, sem vínculo com o Ministério da Saúde, CFM ou IBGE. Inspirado no formato do ElectoMaps.</p>
       </footer>
     </div>

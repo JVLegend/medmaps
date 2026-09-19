@@ -349,6 +349,7 @@ export default function Mapa() {
 
         <footer className="painel-rodape">
           <p>Fonte: Cadastro Nacional de Especialistas (Ministério da Saúde) e vínculos CNES; população do Censo 2022 (IBGE). {meta ? `Coleta de ${meta.geradoEm.split('-').reverse().join('/')}.` : ''}</p>
+          <p>Projeto irmão: <a href="https://medicosatualizados.com.br/" target="_blank" rel="noreferrer">Médicos Atualizados</a>, o radar editorial por especialidade.</p>
           {meta && meta.especialidadesColetadas < meta.especialidadesTotal && <p className="aviso">Coleta parcial: {meta.especialidadesColetadas} de {meta.especialidadesTotal} especialidades já processadas.</p>}
         </footer>
       </aside>
