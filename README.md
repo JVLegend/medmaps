@@ -40,3 +40,18 @@ python3 scripts/agregar.py       # gera public/data/*.json e public/geo/*.json
 ## Deploy
 
 Vercel, projeto `medmaps`, build `vite build`, saída `dist/`. Hash routing (`#/mapa`), sem rewrites.
+
+## Auditoria de 08/11/2026
+
+`npm run build` agora pré-renderiza a home e nove especialidades prioritárias
+(oito mais numerosas e Oftalmologia), incluindo tabelas de UFs, fontes, datas,
+canonical próprio e sitemap. URLs `/especialidades/<id>/` são documentos
+estáticos; o mapa e seus links `/#/mapa?esp=<id>` continuam funcionando.
+`npm test` confere a base territorial, o tratamento de população ausente e o
+HTML gerado. Execute após o build. A navegação da home quebra linhas em telas
+estreitas em vez de esconder links.
+
+A base versionada tem 5.571 localidades, 5.570 com população positiva.
+Boa Esperança do Norte/MT (510183) tem zero armazenado, tratado na interface
+como população ausente, não zero habitantes. Nenhum dado populacional foi
+estimado ou substituído. Densidade municipal sem população fica `sem dado`.

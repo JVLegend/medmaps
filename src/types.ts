@@ -34,6 +34,7 @@ export const METRICAS: { id: Metrica; rotulo: string; curto: string }[] = [
 ]
 
 export function valor(par: Par | undefined, pop: number, metrica: Metrica): number | null {
+  if (metrica === 'por100k' && pop <= 0) return null
   if (!par) return metrica === 'sus' ? null : 0
   const [n, sus] = par
   if (metrica === 'total') return n

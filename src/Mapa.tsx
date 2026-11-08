@@ -315,8 +315,9 @@ export default function Mapa() {
               <div><dt>Médicos</dt><dd>{fmtInt(resumo.n)}</dd></div>
               <div><dt>Por 100 mil hab.</dt><dd>{fmt(resumo.por100k, 'por100k')}</dd></div>
               <div><dt>Atendem SUS</dt><dd>{fmt(resumo.sus, 'sus')}</dd></div>
-              <div><dt>Municípios com ≥1</dt><dd>{resumo.cobertura ? `${fmtInt(resumo.cobertura.com)} de ${fmtInt(resumo.cobertura.total)}` : '…'}</dd></div>
+              <div><dt>Localidades com ≥1</dt><dd>{resumo.cobertura ? `${fmtInt(resumo.cobertura.com)} de ${fmtInt(resumo.cobertura.total)}` : '…'}</dd></div>
             </dl>
+            <p className="mini">Cobertura: cadastro territorial completo. População: Censo 2022; localidades sem denominador ficam sem densidade. <a href="/#metodo">Entenda os recortes.</a></p>
           </section>
         ) : <section className="resumo esqueleto-bloco" />}
 
@@ -324,12 +325,12 @@ export default function Mapa() {
           <section className="detalhe">
             <div className="detalhe-topo"><h3>{detalhe.nome} <small>{detalhe.sub}</small></h3><button onClick={() => setSelecionado(null)} aria-label="Fechar">×</button></div>
             <dl>
-              <div><dt>População</dt><dd>{fmtInt(detalhe.pop)}</dd></div>
+              <div><dt>População</dt><dd>{detalhe.pop > 0 ? fmtInt(detalhe.pop) : 'sem dado'}</dd></div>
               <div><dt>Médicos</dt><dd>{fmtInt(detalhe.par?.[0] ?? 0)}</dd></div>
               <div><dt>Por 100 mil</dt><dd>{fmt(valor(detalhe.par, detalhe.pop, 'por100k'), 'por100k')}</dd></div>
               <div><dt>Atendem SUS</dt><dd>{fmt(valor(detalhe.par, detalhe.pop, 'sus'), 'sus')}</dd></div>
             </dl>
-            <p className="mini">{detalhe.pos}º de {fmtInt(detalhe.de)} municípios em {lugar} por {met.curto}.</p>
+            <p className="mini">{detalhe.pos > 0 ? `${detalhe.pos}º de ${fmtInt(detalhe.de)} municípios em ${lugar} por ${met.curto}.` : "Sem posição nesta métrica: falta denominador ou registro aplicável."}</p>
           </section>
         )}
 
@@ -372,7 +373,7 @@ export default function Mapa() {
           <div className="tooltip" style={{ left: hover.x + 14, top: hover.y + 14 }}>
             <strong>{hover.nome}</strong> <span className="uf">{hover.sub}</span>
             <div>{fmtInt(hover.par?.[0] ?? 0)} médicos · {fmt(valor(hover.par, hover.pop, 'por100k'), 'por100k')} por 100 mil</div>
-            <div className="mini">{fmt(valor(hover.par, hover.pop, 'sus'), 'sus')} atendem SUS · pop. {fmtInt(hover.pop)}</div>
+            <div className="mini">{fmt(valor(hover.par, hover.pop, 'sus'), 'sus')} atendem SUS · pop. {hover.pop > 0 ? fmtInt(hover.pop) : 'sem dado'}</div>
           </div>
         )}
         {uf && <button className="limpar" onClick={() => { setUf(''); setSelecionado(null) }}>Voltar ao Brasil</button>}
